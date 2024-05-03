@@ -21,20 +21,52 @@ fn part1(input: &str) -> Result<Option<u32>, String> {
 }
 
 fn process_line(line: &str) -> u32{
-    let line = line
-    .replace("one", "1")
-    .replace("two", "2")
-    .replace("three", "3")
-    .replace("four", "4")
-    .replace("five", "5")
-    .replace("six", "6")
-    .replace("seven", "7")
-    .replace("eight", "8")
-    .replace("nine", "9")
-    .replace("zero", "0");
+
+    let mut index = 0;
+    let line_iter = std::iter::from_fn(move || {
+        let reduced_line = &line[index..];
+
+        let result = 
+        if reduced_line.starts_with("one"){
+            index += "one".len();
+            Some('1')
+        } else if reduced_line.starts_with("two"){
+            index += "two".len();
+            Some('2')
+        } else if reduced_line.starts_with("three"){
+            index += "three".len();
+            Some('3')
+        } else if reduced_line.starts_with("four"){
+            index += "four".len();
+            Some('4')
+        } else if reduced_line.starts_with("five"){
+            index += "five".len();
+            Some('5')
+        } else if reduced_line.starts_with("six"){
+            index += "six".len();
+            Some('6')
+        } else if reduced_line.starts_with("seven"){
+            index += "seven".len();
+            Some('7')
+        } else if reduced_line.starts_with("eight"){
+            index += "eight".len();
+            Some('8')
+        } else if reduced_line.starts_with("nine"){
+            index += "nine".len();
+            Some('9')
+        } else if reduced_line.starts_with("zero"){
+            index += "zero".len();
+            Some('0')
+        } else {
+            let result = reduced_line.chars().next();
+            index += 1;
+            result
+        };
+
+        result
+    });
     
-    let mut iter = line
-        .chars()
+    let mut iter = line_iter
         .filter_map(|character| { 
             character.to_digit(10)
         });
