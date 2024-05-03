@@ -28,41 +28,30 @@ fn process_line(line: &str) -> u32{
 
         let result = 
         if reduced_line.starts_with("one"){
-            index += "one".len();
             Some('1')
         } else if reduced_line.starts_with("two"){
-            index += "two".len();
             Some('2')
         } else if reduced_line.starts_with("three"){
-            index += "three".len();
             Some('3')
         } else if reduced_line.starts_with("four"){
-            index += "four".len();
             Some('4')
         } else if reduced_line.starts_with("five"){
-            index += "five".len();
             Some('5')
         } else if reduced_line.starts_with("six"){
-            index += "six".len();
             Some('6')
         } else if reduced_line.starts_with("seven"){
-            index += "seven".len();
             Some('7')
         } else if reduced_line.starts_with("eight"){
-            index += "eight".len();
             Some('8')
         } else if reduced_line.starts_with("nine"){
-            index += "nine".len();
             Some('9')
         } else if reduced_line.starts_with("zero"){
-            index += "zero".len();
             Some('0')
         } else {
             let result = reduced_line.chars().next();
-            index += 1;
             result
         };
-
+        index += 1;
         result
     });
     
@@ -101,6 +90,10 @@ mod tests {
     #[case("4nineeightseven2", 42)]
     #[case("zoneight234", 14)]
     #[case("7pqrstsixteen", 76)]
+    // this test is from the real input
+    // it tests two overlapping numbers
+    // where the second number should succeed
+    #[case("five75pvngkvx9nnlttwotwonev", 51)]
     fn line_test(
         #[case] line: &str,
         #[case] expected: u32,
